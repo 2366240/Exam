@@ -2,3 +2,4 @@
 	style="height: 10rem; background-color: #dbb;">
 	<a href="StudentList.action">学生管理</a>
 </div>
+<%@page contentType = "text/html; charset=UTF-8" %>

@@ -42,7 +42,7 @@
 							<%--パラメーターf3が存在している場合checkedを追記 --%>
 							<input class="form-check-input" type="checkbox"
 							id="student-f3-check" name="f3" value="t"
-							<c:if test="${!empty f3}">checked<c:if> />
+							<c:if test="${!empty f3}">checked</c:if> />
 						</label>
 					</div>
 					<div class="col-2 text-center">
@@ -81,8 +81,8 @@
 			 							</c:otherwise>
 			 						</c:choose>
 			 					</td>
-			 					<td><a href="StudentUpdate.action?no=${student.no}"変更</a></td>
-			 					<td><a href="StudentDelete.action?no=${student.no}"削除</a></td>
+			 					<td><a href="StudentUpdate.action?no=${student.no}">変更</a></td>
+			 					<td><a href="StudentDelete.action?no=${student.no}">削除</a></td>
 			 				</tr>
 			 			</c:forEach>
 			 		</table>
@@ -94,5 +94,5 @@
 		</section>
 	</c:param>
 </c:import>
-			 			</label>
+
 
