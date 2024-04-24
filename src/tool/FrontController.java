@@ -2,6 +2,9 @@ package tool;
 
 import java.io.IOException;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,7 +47,7 @@ public class FrontController extends HttpServlet {
 		}
 	}
 	@Override
-	protectsd void doPost(HttpServletRequest requst, HttpServletResponse response) throws Servletexception, IOException{
+	protected void doPost(HttpServletRequest requst, HttpServletResponse response) throws Servletexception, IOException{
 		doGet(requst,response);
 	}
 		response.getWriter().append("Served at:").append(request.getContextPath());

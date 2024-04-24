@@ -1,10 +1,14 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import bean.School;
 import bean.Student;
-import sun.rmi.transport.Connection;
 
 
 
@@ -12,7 +16,7 @@ import sun.rmi.transport.Connection;
 
 public class StudentDao extends Dao {
 
-	private String bassSql = "select * from student where school_cd=? ";
+	private String baseSql = "select * from student where school_cd=? ";
 
 	public Student get(String no) throws Exception {
 		//学生インスタンスを初期化
@@ -75,7 +79,7 @@ public class StudentDao extends Dao {
 
 	private List<Student> postFilter(ResultSet rSet, School school) throws Exception {
 		//リストを初期化
-		List<student> list = new ArrayList<> ();
+		List<Student> list = new ArrayList<> ();
 		try {
 			//リザルトセットを全権走査
 			while (rSet.next()) {
@@ -91,7 +95,7 @@ public class StudentDao extends Dao {
 				//リストに追加
 				list.add(student);
 			}
-		} catch (SQLException | NuiiPointerException e) {
+		} catch (SQLException | NullPointerException e) {
 			e.printStackTrace();
 		}
 
@@ -121,7 +125,7 @@ public class StudentDao extends Dao {
 
 		try {
 			//プリペアードステーメントにSQL文をセット
-			statement = connection.prepareStatementt(baseSql + condition + conditionIsAttend + order);
+			statement = connection.prepareStatement(baseSql + condition + conditionIsAttend + order);
 			//プリペアードステートメントに学生コードをバインド
 			statement.setString(1, school.getCd());
 			//プリペアードステートメントに入学年度をバインド
@@ -131,7 +135,7 @@ public class StudentDao extends Dao {
 			//プリペアードステートメントを実行
 			rSet = statement.executeQuery();
 			//リストへの格納処理を実行
-			list = postFikter(rSet, school);
+			list = postFilter(rSet, school);
 		} catch ( Exception e) {
 			throw e;
 		} finally {
@@ -168,7 +172,7 @@ public class StudentDao extends Dao {
 		//リザルトセット
 		ResultSet rSet = null;
 		//SQL文の条件
-		String ,condition = "and ent_year=?";
+		String condition = "and ent_year=?";
 		//SQL文のソート
 		String order = "order by no asc";
 
@@ -293,7 +297,7 @@ public class StudentDao extends Dao {
 			} else {
 				//学生が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection.preparent("updarte student set name = ?, ent_year = ?, class_num = ?, is_attend = ? where no = ?");
+				statement = connection.prepareStatement("updarte student set name = ?, ent_year = ?, class_num = ?, is_attend = ? where no = ?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, student.getName());
 				statement.setInt(2, student.getEntYear());
@@ -334,3 +338,4 @@ public class StudentDao extends Dao {
 		}
 
 	}
+}

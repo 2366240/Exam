@@ -1,8 +1,10 @@
 package scoremanager.main;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import bean.School;
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
 
@@ -19,6 +22,7 @@ import tool.Action;
 
 public class StudentListAction extends Action{
 
+	private Student teacher;
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session = request.getSession();//TODO 自動生成されたメゾット・スタブ
@@ -61,11 +65,11 @@ public class StudentListAction extends Action{
 		students = sDao.filter(teacher.getSchool(), entYear, classNum, isAttend);
 	} else if (entYear != 0 && classNum.equals("0")) {
 		//入学年度のみ指定
-		student = sDao.filter(teacher.getSchool(), entYear, isAttend);
+		students = sDao.filter(teacher.getSchool(), entYear, isAttend);
 	} else if (entYear ==- 0 && classNum ==null || entYear == 0 && classNum.equals("0")) {
 		//指定なしの場合
 		//全学年情報を取得
-		studennts = sDao.filter(teacher.getSchool(), is Attend);
+		students = sDao.filter(teacher.getSchool(), is Attend);
 	} else {
 		errors.put("f1", "クラス指定する場合は入学年度も指定してください");
 		req.setAttribute("errors", errors);
