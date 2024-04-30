@@ -22,11 +22,11 @@ import tool.Action;
 
 public class StudentListAction extends Action{
 
-	private Student teacher;
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		HttpSession session = request.getSession();//TODO 自動生成されたメゾット・スタブ
-		Teacher teacher = (Teacher)session.getAttribute("user");
+		HttpSession session = request.getSession();//セッション
+		//Teacher teacher = (Teacher)session.getAttribute("user");
+
 		//テスト用に学校オブジェクトと講師オブジェクトを一次的に作る
 		School school = new School();
 		school.setCd("tes");
@@ -51,12 +51,12 @@ public class StudentListAction extends Action{
 		StudentDao sDao = new StudentDao(); //学生Dao
 		ClassNumDao cNumDao = new ClassNumDao(); //クラス番号Daoを初期化
 		Map<String, String> errors = new HashMap<>(); //エラーメッセージ
-	}
+
 	//リクエストパラメーターの取得2
-	entYearStr = req.getParameter("f1");
-	classNum = req.getParameter("f2");
-	isAttendStr = req.getParameter("f3");
-	//DBからデータ取得
+	entYearStr = request.getParameter("f1");
+	classNum = request.getParameter("f2");
+	isAttendStr = request.getParameter("f3");
+	//DBからデータ取得3
 	//ログインユーザーの学校コードを元にクラス番号の一覧を取得
 	List<String> list = cNumDao.filter(teacher.getSchool());
 
@@ -69,10 +69,10 @@ public class StudentListAction extends Action{
 	} else if (entYear ==- 0 && classNum ==null || entYear == 0 && classNum.equals("0")) {
 		//指定なしの場合
 		//全学年情報を取得
-		students = sDao.filter(teacher.getSchool(), is Attend);
+		students = sDao.filter(teacher.getSchool(), isAttend);
 	} else {
 		errors.put("f1", "クラス指定する場合は入学年度も指定してください");
-		req.setAttribute("errors", errors);
+		request.setAttribute("errors", errors);
 		//全学生情報を取得
 		students = sDao.filter(teacher.getSchool(), isAttend);
 	}
@@ -89,22 +89,22 @@ public class StudentListAction extends Action{
 	}
 	//レスポンス値をセット6
 	//リスエストに入学年度をセット
-	req.setAttribute("f1" , entYear);
+	request.setAttribute("f1" , entYear);
 	//リクエストにクラス番号をセット
-	req.setAttribute("f2" , classNum);
+	request.setAttribute("f2" , classNum);
 	//在学フラグが送信されていた場合
-	if(isAttentStr != null) {
+	if(isAttendStr != null) {
 		//在学フラグを立てる
-		isAttent = true;
+		isAttend = true;
 		//リクエストに在学フラグをセット
-		req.setAttribute("f3", isAttendStr);
+		request.setAttribute("f3", isAttendStr);
 	}
 	//リクエストに学生リストをセット
-	req.setAttrinute("students" , students);
+	request.setAttribute("students" , students);
 	//リスエストにデータをセット
-	req.setAttribute("class_num_set" , list);
-	req.setAttribute("ent_year_set" , entYearSet);
+	request.setAttribute("class_num_set" , list);
+	request.setAttribute("ent_year_set" , entYearSet);
 	//JSPへフォワード7
-	req.getRequestDispatcher("student_list.jsp").forward(req, res;)
+	request.getRequestDispatcher("student_list.jsp").forward(request, response);
 	}
 }

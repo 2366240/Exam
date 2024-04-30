@@ -303,7 +303,7 @@ public class StudentDao extends Dao {
 				statement.setInt(2, student.getEntYear());
 				statement.setString(3, student.getClassNum());
 				statement.setBoolean(4, student.isAttend());
-				statement.setString(5, student,getNo());
+				statement.setString(5, student.getNo());
 			}
 
 			//プリペアードステートメントを実行

@@ -9,10 +9,10 @@ public class Teacher implements Serializable {
 	private String name;
 	private School school;
 
-	public String setid() {
+	public String setId() {
 		return id;
 	}
-	public void setid(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getPassword() {
