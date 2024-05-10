@@ -286,7 +286,7 @@ public class StudentDao extends Dao {
 			if(old == null) {
 				//学生が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
-				statement = connection.prepareStatement("insert into student(no, name, ent_year, class_num, is_attend, school_cd)value(?, ?, ?, ?, ?, ?)");
+				statement = connection.prepareStatement("insert into student(no, name, ent_year, class_num, is_attend, school_cd) values(?, ?, ?, ?, ?, ?)");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, student.getNo());
 				statement.setString(2, student.getName());
@@ -297,7 +297,7 @@ public class StudentDao extends Dao {
 			} else {
 				//学生が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection.prepareStatement("updarte student set name = ?, ent_year = ?, class_num = ?, is_attend = ? where no = ?");
+				statement = connection.prepareStatement("update student set name = ?, ent_year = ?, class_num = ?, is_attend = ? where no = ?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, student.getName());
 				statement.setInt(2, student.getEntYear());

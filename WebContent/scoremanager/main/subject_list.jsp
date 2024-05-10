@@ -11,7 +11,7 @@
 
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secodary bg-opacity-10 py-2 px-4">学生管理</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secodary bg-opacity-10 py-2 px-4">成績一覧(科目)</h2>
 			<div class="my-2 text-end px-4">
 				<a href="StudentCreate.action">新規登録</a>
 			</div>
@@ -40,16 +40,22 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-2 form-check text-center">
-						<label class="form-check-label" for="student-f3-check">在学中
-							<%--パラメーターf3が存在している場合checkedを追記 --%>
-							<input class="form-check-input" type="checkbox"
-							id="student-f3-check" name="f3" value="t"
-							<c:if test="${!empty f3}">checked</c:if> />
-						</label>
+
+					<div class="col-2 text-center">
+						<button class="bth btn-secondary" id="filter-button">検索</button>
+					</div>
+					<div class="col-4">
+						<label class="from-label" for="student-fl-select">学生番号</label>
+						<select class="form-select" id="student-fl-select" name="fl">
+							<option value="0">--------</option>
+							<c:forEach var="year" items="${ent_year_set}">
+								<%-- 現在のyearと選択されていたflが一致していた場合selectedを追記 --%>
+								<option value="${yesr}" <c:if test="${year==fl}">select</c:if>>${year}</option>
+							</c:forEach>
+						</select>
 					</div>
 					<div class="col-2 text-center">
-						<button class="bth btn-secondary" id="filter-button">絞込み</button>
+						<button class="bth btn-secondary" id="filter-button">検索</button>
 					</div>
 					<div class="mt-2 text-warning">${erros.get("fl")}</div>
 				</div>
@@ -60,10 +66,11 @@
 			 		<table class="table table-hover">
 			 			<tr>
 			 				<th>入学年度</th>
+			 				<th>クラス</th>
 			 				<th>学生番号</th>
 			 				<th>氏名</th>
-			 				<th>クラス</th>
-			 				<th class="text-center">在学中</th>
+			 				<th>1回目</th>
+			 				<th>2回目</th>
 			 				<th></th>
 			 				<th></th>
 			 			</tr>

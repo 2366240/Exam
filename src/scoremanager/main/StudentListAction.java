@@ -29,12 +29,12 @@ public class StudentListAction extends Action{
 
 		//テスト用に学校オブジェクトと講師オブジェクトを一次的に作る
 		School school = new School();
-		school.setCd("tes");
-		school.setName("テスト校");
+		school.setCd("oom");
+		school.setName("大宮校");
 
 		Teacher teacher = new Teacher();
-		teacher.setId("admin1");
-		teacher.setName("管理者1");
+		teacher.setId("admin");
+		teacher.setName("大宮花子");
 		teacher.setPassword("password");
 		teacher.setSchool(school);
 
