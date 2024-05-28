@@ -40,24 +40,6 @@
 							</c:forEach>
 						</select>
 					</div>
-
-					<div class="col-2 text-center">
-						<button class="bth btn-secondary" id="filter-button">検索</button>
-					</div>
-					<div class="col-4">
-						<label class="from-label" for="student-fl-select">学生番号</label>
-						<select class="form-select" id="student-fl-select" name="fl">
-							<option value="0">--------</option>
-							<c:forEach var="year" items="${ent_year_set}">
-								<%-- 現在のyearと選択されていたflが一致していた場合selectedを追記 --%>
-								<option value="${yesr}" <c:if test="${year==fl}">select</c:if>>${year}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div class="col-2 text-center">
-						<button class="bth btn-secondary" id="filter-button">検索</button>
-					</div>
-					<div class="mt-2 text-warning">${erros.get("fl")}</div>
 				</div>
 			 </form>
 			 <c:choose>
@@ -82,14 +64,6 @@
 			 					<td>${student.classNum}</td>
 			 					<td class="text-center">
 			 						<%--在学フラグが立っている場合「〇」それ以外は「✕」を表示 --%>
-			 						<c:choose>
-			 							<c:when test="${student.isAttend()}">
-			 								〇
-			 							</c:when>
-			 							<c:otherwise>
-			 								✕
-			 							</c:otherwise>
-			 						</c:choose>
 			 					</td>
 			 					<td><a href="StudentUpdate.action?no=${student.no}">変更</a></td>
 			 					<td><a href="StudentDelete.action?no=${student.no}">削除</a></td>
