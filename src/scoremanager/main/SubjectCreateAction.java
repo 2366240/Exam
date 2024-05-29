@@ -34,23 +34,7 @@ public class SubjectCreateAction extends Action {
 		teacher.setSchool(school);
 		//リクエストパラメータ―の取得 2
 		//なし
-
-		//DBからデータ取得 3
-		List<String> list = cNumDao.filter(teacher.getSchool());// ログインユーザーの学校コードをもとにクラス番号の一覧を取得
-
-		//ビジネスロジック 4
-		for (int i = year - 10; i < year + 10; i++) {
-			entYearSet.add(i);
-		}// 現在を起点に前後10年をリストに追加
-
-		//DBへデータ保存 5
-		//なし
-
-		//レスポンス値をセット 6
-		req.setAttribute("class_num_set", list);//クラス番号のlistをセット
-		req.setAttribute("ent_year_set", entYearSet);//入学年度のlistをセット
-
 		//JSPへフォワード 7
-		req.getRequestDispatcher("student_create.jsp").forward(req, res);
+		req.getRequestDispatcher("subject_create.jsp").forward(req, res);
 	}
 }
