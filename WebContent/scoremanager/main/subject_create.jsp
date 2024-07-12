@@ -12,7 +12,7 @@
 	<c:param name="content">
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報登録</h2>
-			<form action="SubjectCreateExecute.action" method = post"></form>
+			<form action="SubjectCreateExecute.action" method = post">
 				<div class="mx-3 py-2">
 					<div class="mb-3">
 						<label class="form-label" for="subject-cd-select">科目コード</label>
@@ -28,13 +28,13 @@
 						<div class="mt-2 text-warning">${errors.get("name")}</div>
 					</div>
 					<div class="mt-3">
-						<input class="btn btn-primary" type="subject" value="登録">
+						<input class="btn btn-primary" type="submit" value="登録">
 					</div>
 				</div>
 			</form>
 			<div class="lh-lg row">
 				<div class="mx-3 col-1">
-					<a href="StudentList.action">戻る</a>
+					<a href="SubjectList.action">戻る</a>
 				</div>
 			</div>
 		</section>

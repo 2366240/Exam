@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.Subject;
-
 import bean.School;
-import bean.Student;
+import bean.Subject;
 
 
 public class SubjectDao extends Dao {
@@ -27,7 +25,7 @@ public class SubjectDao extends Dao {
 
 		try {
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select * from student where cd=? and school_cd = ?");
+			statement = connection.prepareStatement("select * from subject where cd=? and school_cd = ?");
 			//プリペアードステートメントに科目コードをバインド
 			statement.setString(1, cd);
 			//プリペアードステートメントに学校コードをバインド
@@ -75,7 +73,7 @@ public class SubjectDao extends Dao {
 
 	public List<Subject> filter(School school) throws Exception {
 		//リストを初期化
-		List<Student> list = new ArrayList<>();
+		List<Subject> list = new ArrayList<>();
 		//コネクションを確立
 		Connection connection = getConnection();
 		//プリペアードステートメント
@@ -133,7 +131,7 @@ public class SubjectDao extends Dao {
 
 		try {
 			//データベースから学生を取得
-			Student old = get(subject.getCd(), subject.getSchool());
+			Subject old = get(subject.getCd(), subject.getSchool());
 			if(old == null) {
 				//学生が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
@@ -141,14 +139,14 @@ public class SubjectDao extends Dao {
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, subject.getName());
 				statement.setString(2, subject.getCd());
-				statement.setInt(3, subject.getSchool().getCd());
+				statement.setString(3, subject.getSchool().getCd());
 			} else {
 				//学生が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection.prepareStatement("update student set name = ? where cd = ?");
+				statement = connection.prepareStatement("update subject set name = ? where cd = ?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, subject.getName());
-				statement.setInt(2, subject.getCd());
+				statement.setString(2, subject.getCd());
 			}
 
 			//プリペアードステートメントを実行

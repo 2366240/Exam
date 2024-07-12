@@ -2,29 +2,41 @@ package scoremanager.main;
 
 import java.util.List;
 
-import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.School;
+import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
 
 
 public class SubjectListAction extends Action {
+
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 			//ローカル変数の宣言 1
 
 			SubjectDao sDao = new SubjectDao();//科目Daoを初期化
 			HttpSession session = req.getSession(true);//セッションを取得
-			Teacher teacher = (Teacher) session.getAttribute("user");//ログインしているユーザーを取得
+			//Teacher teacher = (Teacher) session.getAttribute("user");//ログインしているユーザーを取得
+			School school = new School();
+			school.setCd("oom");
+			school.setName("大宮校");
+
+			Teacher teacher = new Teacher();
+			teacher.setId("admin");
+			teacher.setName("大宮花子");
+			teacher.setPassword("password");
+			teacher.setSchool(school);
 
 			//リクエストパラメータ―の取得 2
 			//なし
 			//DBからデータ取得 3
 			//ログインユーザーの学校コードをもとに科目の一覧を取得
 			List<Subject> subjects = sDao.filter(teacher.getSchool());
+
 
 			//ビジネスロジック 4
 			//なし
